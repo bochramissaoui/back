@@ -1,6 +1,6 @@
 package markers.marker.model;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 @Entity
 public class reservations {
     @Id
@@ -19,7 +22,8 @@ public class reservations {
     private String start;
     private String end;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false ,cascade = CascadeType.ALL )
+    @ManyToOne(fetch = FetchType.EAGER, optional = false  )
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn( name="idUser" )
     private Marker marker;
  public reservations() {}

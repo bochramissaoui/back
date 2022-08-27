@@ -17,6 +17,7 @@ import markers.marker.exception.UserNotFoundException;
 import markers.marker.model.reservations;
 import markers.marker.repo.MarkerRepo;
 import markers.marker.repo.reservationRepo;
+
 @RestController
 @RequestMapping("/marker")
 public class reservationCont {
@@ -39,18 +40,20 @@ public class reservationCont {
     return new ResponseEntity<>(reservations, HttpStatus.OK);
   }
   @PostMapping("/{markerId}/reservations")
+  
   public ResponseEntity<reservations> createreservations(@PathVariable(value = "markerId") Long markerId,
       @RequestBody reservations reservationsRequest) {
     reservations reservations = markerRepo.findById(markerId).map(marker -> {
       reservationsRequest.setMarker(marker);
       return reservationRepo.save(reservationsRequest);
     }).orElseThrow(() -> new UserNotFoundException("Not found marker with id = " + markerId));
+   
     return new ResponseEntity<>(reservations, HttpStatus.CREATED);
   }
 
-  @DeleteMapping("/reservations/{id}")
-  public ResponseEntity<HttpStatus> deletereservations(@PathVariable("id") long id) {
-    reservationRepo.deleteById(id);
+  @DeleteMapping("/reservations/{reserid}")
+  public ResponseEntity<HttpStatus> deletereservations(@PathVariable(value = "reserid") long reserid) {
+    reservationRepo.deleteById(reserid);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
   

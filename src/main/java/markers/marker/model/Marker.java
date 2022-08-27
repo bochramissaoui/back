@@ -15,7 +15,23 @@ public class Marker implements Serializable {
     private float lng;
     private String information;
     private String imageUrl;
- 
+    private String domaine ;
+    public Marker(String name, String ville, float lat, float lng, String information, String imageUrl,
+            String domaine) {
+        this.name = name;
+        this.ville = ville;
+        this.lat = lat;
+        this.lng = lng;
+        this.information = information;
+        this.imageUrl = imageUrl;
+        this.domaine = domaine;
+    }
+    public String getDomaine() {
+        return domaine;
+    }
+    public void setDomaine(String domaine) {
+        this.domaine = domaine;
+    }
     @Column(nullable = false, updatable = false)
     private String markerCode;
 
@@ -27,15 +43,7 @@ public class Marker implements Serializable {
         this.markerCode = employeeCode;
     }
     public Marker () {}
-    public Marker(String name, String ville, Float lat, Float lng, String information , String imageUrl,String markerCode  ) {
-        this.name = name;
-        this.ville = ville;
-        this.lat = lat;
-        this.lng = lng;
-        this.information = information;
-        this.imageUrl = imageUrl ;
-    
-    }
+ 
     public Long getId() {
         return id;
     }
